@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>下载 · G-Lang v0.4.0</title>
+<meta name="description" content="下载 G-Lang v0.4.0：Windows 安装程序、Windows 便携包、源码包。含历史版本与源码构建说明。">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#464CB0"/><stop offset="1" stop-color="#282C65"/>
+        </linearGradient></defs>
+        <rect width="64" height="64" rx="14" fill="url(#lg)"/>
+        <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="40" fill="#fff">G</text>
+        <rect x="19" y="44" width="15" height="3" rx="1.5" fill="#4AD9E8"/>
+        <rect x="19" y="50" width="10" height="3" rx="1.5" fill="#4AD9E8"/>
+        <rect x="19" y="56" width="6" height="3" rx="1.5" fill="#4AD9E8"/>
+      </svg>
+      <span class="brand-name">G-Lang</span>
+      <span class="brand-tag">v0.4.0</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="docs.html">文档</a>
+      <a href="download.html" class="active">下载</a>
+      <a href="playground.html">演练场</a>
+    </nav>
+    <div class="topbar-right">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/xxy150310git/G-Lang" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary btn-sm" href="#latest">下载 v0.4.0</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="dl-hero">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      最新发行版 <code>v0.4.0</code> · 语言规范 <code>v0.3</code> · 2026-11-08
+    </div>
+    <h1 class="display" style="font-size:clamp(30px,3.6vw,42px);margin-bottom:14px">下载 G-Lang</h1>
+    <p class="lead" style="margin-bottom:0">
+      安装程序自带图形工作台、命令行解释器与自测程序，装完按 <kbd>F11</kbd> 就能跑第一个程序。
+      只支持 <b>64 位 Windows 7 及以上</b>。
+    </p>
+  </div>
+</section>
+
+<section class="section tight" id="latest">
+  <div class="wrap">
+    <div class="dl-grid">
+
+      <div class="dl-card primary">
+        <div class="os">Windows · 推荐</div>
+        <h3>安装程序</h3>
+        <div class="file">G-Lang-v0.4.0-安装程序.exe</div>
+        <div class="size">
+          <span>1.15 MB</span><span>64 位</span><span>NSIS</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 16px">
+          全中文向导：选组件、选目录、桌面快捷方式、<code>.gl</code> 文件关联，装完能在「应用和功能」里正常卸载。
+        </p>
+        <div class="foot">
+          <a class="btn btn-primary btn-block" href="https://www.ilanzou.com/s/ldeyTLGqy?code=lkgl" target="_blank" rel="noopener">下载安装程序</a>
+          <div class="code-pill" data-copy="lkgl">提取码 lkgl <span style="opacity:.6">点击复制</span></div>
+          <div class="hint">蓝奏云直链。下载后双击安装，装到 <code>C:\Program Files\LingKong\G-Lang</code>。</div>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="os">Windows · 免安装</div>
+        <h3>便携包</h3>
+        <div class="file">G-Lang-v0.4.0-Windows.zip</div>
+        <div class="size">
+          <span>2.67 MB</span><span>解压即用</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 16px">
+          不想装到 Program Files 就用这个。解压后双击 <code>glang-workbench.exe</code>，只依赖系统 DLL。
+        </p>
+        <div class="foot">
+          <a class="btn btn-ghost btn-block" href="https://github.com/xxy150310git/G-Lang/releases" target="_blank" rel="noopener">前往 GitHub Releases</a>
+          <div class="hint">便携包发布在 GitHub Releases 页面；国内访问慢的话，用左边的安装程序更省事。</div>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="os">源码</div>
+        <h3>源码包</h3>
+        <div class="file">G-Lang-v0.4.0-源码.tar.gz</div>
+        <div class="size">
+          <span>608 KB</span><span>C++17</span><span>无第三方依赖</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink-2);margin:0 0 16px">
+          含解释器、工作台（Win32）、Android 工程、11 个示例、228 项测试与全部文档。
+        </p>
+        <div class="foot">
+          <a class="btn btn-ghost btn-block" href="https://www.ilanzou.com/s/89CyfnIbB?code=lkgl" target="_blank" rel="noopener">下载源码包</a>
+          <div class="code-pill" data-copy="lkgl">提取码 lkgl <span style="opacity:.6">点击复制</span></div>
+          <div class="hint">解压后按下方「从源码构建」三步走。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note" style="border-left:2px solid var(--warn);background:rgba(245,197,107,.09);border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:var(--ink-2);margin-top:22px">
+      <b>关于 Windows 的拦截提示：</b>程序没有代码签名，首次运行可能出现 SmartScreen 蓝框。点「更多信息 → 仍要运行」即可，这不是病毒提示。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">安装</div>
+      <h2 class="sec">装好之后，三步跑起来</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div><b>双击安装程序</b>，向导全中文。建议勾上「桌面快捷方式」和「.gl 文件关联」。</div></div>
+      <div class="step"><div><b>启动「G-Lang 编程工作台」</b>：开始菜单 → 所有程序 → G-Lang，或双击桌面图标。</div></div>
+      <div class="step"><div><b>按 F11 运行</b>。编辑器里已经放好示例代码，直接跑就有结果；<kbd>F9</kbd> 只查语法，<kbd>Esc</kbd> 停正在跑的程序。</div></div>
+      <div class="step"><div><b>要键盘输入的程序</b>（两数求和、判断闰年、猜数字）先在下方的「输入」框里每行填一个值，再按 F11。</div></div>
+      <div class="step"><div><b>卸载</b>：开始菜单 → G-Lang → 卸载 G-Lang，或 设置 → 应用 → 已安装的应用。卸载会删掉安装目录，自己写的 <code>.gl</code> 记得先复制出来。</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">安装包里有什么</div>
+      <h2 class="sec">三个程序，各管一件事</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:28%">程序</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><code>glang-workbench.exe</code></td><td>图形工作台，日常就用这个。写代码、<kbd>F11</kbd> 运行、<kbd>F9</kbd> 查语法、<kbd>Esc</kbd> 停止。左代码 / 右上输出 / 右下输入，三区可拖动分割。</td></tr>
+          <tr><td><code>glang.exe</code></td><td>命令行解释器。在 cmd 里 <code>glang 程序.gl</code>，也支持 <code>--检查</code>、<code>--提示</code>、<code>--版本</code>。</td></tr>
+          <tr><td><code>glang-selftest.exe</code></td><td>无界面自测程序，输出不走控制台配色，适合放进批处理里调用。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">从源码构建</div>
+      <h2 class="sec">只要 CMake，没有别的依赖</h2>
+      <p>Linux / macOS 上也可以用同一份源码编译解释器内核（图形工作台是 Win32 专用）。</p>
+    </div>
+<pre class="code">tar -xzf G-Lang-v0.4.0-源码.tar.gz
+cd G-Lang-v0.4.0-源码
+
+<span class="tok-c"># Windows + MinGW</span>
+cmake -S . -B build -G "MinGW Makefiles" &amp;&amp; cmake --build build
+
+<span class="tok-c"># 其他平台（只要命令行解释器）</span>
+cmake -S . -B build &amp;&amp; cmake --build build
+
+<span class="tok-c"># 跑回归测试：228 项</span>
+python3 tests/run_tests.py
+
+<span class="tok-c"># 产物：build/glang 与 build/glang-workbench.exe</span></pre>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">历史版本</div>
+      <h2 class="sec">旧版本留档</h2>
+      <p>版本号自 0.4.0 起遵循 SemVer 2.0.0。<b>语言规范版本</b>和<b>发行版版本</b>是两个号：0.3.2 是语言功能，0.4.0 只动工作台界面。</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:16%">发行版</th><th style="width:16%">语言规范</th><th>主要变化</th></tr></thead>
+        <tbody>
+          <tr><td><b>v0.4.0</b></td><td>v0.3</td><td>工作台状态栏改成六格面板。语言功能与 0.3.2 相同，旧程序一行不用改。</td></tr>
+          <tr><td>v0.3.2</td><td>v0.3</td><td><code>尝试 / 捕获 / 抛出</code>；切片、安全取值、8 个高阶函数。L1 语义层收口。</td></tr>
+          <tr><td>v0.3.1</td><td>v0.3</td><td>默认参数、可变参数、匿名函数、<code>自身</code>；类型标注与 <code>常量</code>。</td></tr>
+          <tr><td>v0.3.0</td><td>v0.3</td><td>三层作用域（<code>局部 / 全局 / 非局部</code>）、真正的闭包、任意表达式可调用。</td></tr>
+          <tr><td>v0.2.2</td><td>v0.2</td><td>4 个关键字改名（<code>若</code>→<code>如果</code>、<code>接收</code>→<code>接受</code> 等），<code>中</code> 改为必需，示例全部重写。</td></tr>
+          <tr><td>v0.2.1</td><td>v0.1</td><td>修崩溃与精度缺陷（整数回绕、栈溢出、负数取余），语法不变。</td></tr>
+          <tr><td>v0.2</td><td>v0.1</td><td>首次打包：工作台、安装程序、示例集。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">历史包（v0.2 ~ v0.3.2 的安装程序、便携包、源码）保存在项目盘 <code>P4工作台</code> 目录下，按 <code>archive-v0.3.2</code> 这样的前缀归档。</div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h3>下载完，先来一段「你好，世界」</h3>
+        <p>不想下载？网页演练场能直接跑 11 个示例。</p>
+      </div>
+      <div class="cta-row" style="margin:0">
+        <a class="btn btn-primary" href="playground.html">打开演练场</a>
+        <a class="btn btn-ghost" href="docs.html#start">看快速上手</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:12px">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#464CB0"/><stop offset="1" stop-color="#282C65"/>
+            </linearGradient></defs>
+            <rect width="64" height="64" rx="14" fill="url(#lg2)"/>
+            <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="40" fill="#fff">G</text>
+            <rect x="19" y="44" width="15" height="3" rx="1.5" fill="#4AD9E8"/>
+            <rect x="19" y="50" width="10" height="3" rx="1.5" fill="#4AD9E8"/>
+            <rect x="19" y="56" width="6" height="3" rx="1.5" fill="#4AD9E8"/>
+          </svg>
+          <span class="brand-name">G-Lang</span>
+        </a>
+        <p style="margin:0;max-width:26em;color:var(--ink-3);font-size:13px">
+          凌空工作室（LingKong Studio）出品。<br>
+          使用中文写代码，从第一行开始。
+        </p>
+      </div>
+      <div>
+        <h4>产品</h4>
+        <ul>
+          <li><a href="download.html">下载</a></li>
+          <li><a href="playground.html">演练场</a></li>
+          <li><a href="docs.html#start">快速上手</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>文档</h4>
+        <ul>
+          <li><a href="docs.html#keywords">关键字总表</a></li>
+          <li><a href="docs.html#builtins">内置函数</a></li>
+          <li><a href="docs.html#errors">错误码手册</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>社区</h4>
+        <ul>
+          <li><a href="https://github.com/xxy150310git/G-Lang" target="_blank" rel="noopener">GitHub 仓库</a></li>
+          <li><a href="https://github.com/xxy150310git/G-Lang/releases" target="_blank" rel="noopener">版本发布</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 凌空工作室 · G-Lang</span>
+      <span>发行版 v0.4.0 · 语言规范 v0.3</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

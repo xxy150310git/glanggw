@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>演练场 · G-Lang</title>
+<meta name="description" content="在浏览器里直接写、直接运行 G-Lang 程序：11 个官方示例随时切换，报错也带行号、插入符和修法。">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#464CB0"/><stop offset="1" stop-color="#282C65"/>
+        </linearGradient></defs>
+        <rect width="64" height="64" rx="14" fill="url(#lg)"/>
+        <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="40" fill="#fff">G</text>
+        <rect x="19" y="44" width="15" height="3" rx="1.5" fill="#4AD9E8"/>
+        <rect x="19" y="50" width="10" height="3" rx="1.5" fill="#4AD9E8"/>
+        <rect x="19" y="56" width="6" height="3" rx="1.5" fill="#4AD9E8"/>
+      </svg>
+      <span class="brand-name">G-Lang</span>
+      <span class="brand-tag">v0.4.0</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="docs.html">文档</a>
+      <a href="download.html">下载</a>
+      <a href="playground.html" class="active">演练场</a>
+    </nav>
+    <div class="topbar-right">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/xxy150310git/G-Lang" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary btn-sm" href="download.html">下载 v0.4.0</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap pg-wrap">
+  <div class="pg-head">
+    <h1>网页演练场</h1>
+    <p>不用装任何东西。改完按 <kbd>F11</kbd> 或点「运行」，右下角输出区就有结果；报错会带行号、源码原文和修法。</p>
+  </div>
+
+  <div class="pg-toolbar">
+    <button class="btn btn-primary btn-sm" id="run" type="button">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m6 4 14 8-14 8Z"/></svg>
+      运行 <span style="opacity:.65;font-size:12px">F11</span>
+    </button>
+    <button class="btn btn-ghost btn-sm" id="reset" type="button">重置</button>
+    <button class="btn btn-ghost btn-sm" id="clear" type="button">清空</button>
+    <div class="spacer"></div>
+    <label for="examples" style="font-size:12.5px;color:var(--ink-3)">示例</label>
+    <select class="pg-select" id="examples"></select>
+  </div>
+
+  <div class="pg-main">
+    <div class="pg-pane left">
+      <div class="pane-title">
+        <span id="pane-file">代码</span>
+        <span class="right">Tab 缩进 4 格</span>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter"></div>
+        <div class="editor-main">
+          <pre class="hl" id="hl" aria-hidden="true"></pre>
+          <textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" aria-label="G-Lang 代码编辑区"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="pg-pane right">
+      <div class="pane-title">
+        <span>输出</span>
+        <span class="right">控制台</span>
+      </div>
+      <pre class="console" id="console"></pre>
+      <div class="stdin-wrap">
+        <div class="pane-title">
+          <span>输入</span>
+          <span class="right">每行一个值，按顺序供给「输入」</span>
+        </div>
+        <textarea id="stdin" class="stdin" spellcheck="false" wrap="off" aria-label="程序输入区"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-status ready" id="status">
+    <div><span class="st-dot"></span><span id="st-text">就绪</span></div>
+    <div><span class="v" id="st-pos">行 1, 列 1</span></div>
+    <div><span class="v" id="st-lines">共 0 行</span></div>
+    <div><span class="v" id="st-file">—</span></div>
+    <div>G-Lang v0.3 子集 · 浏览器内执行</div>
+  </div>
+
+  <p style="color:var(--ink-3);font-size:12.5px;margin:14px 0 0;line-height:1.7">
+    演练场是把 v0.3 的核心语义重新实现了一遍的迷你解释器（前端 JS），覆盖 37 个关键字、九种值、
+    常用内置函数与三行制报错。少数边角（文件读写、模块、部分高阶细节）没有实现；
+    要跑完整实现，请下载 Windows 版。
+  </p>
+</div>
+
+<footer class="footer" style="margin-top:26px">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© 2026 凌空工作室 · G-Lang</span>
+      <span><a href="docs.html#keywords">关键字总表</a> · <a href="docs.html#errors">错误码手册</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/examples.js"></script>
+<script src="assets/glang.js"></script>
+<script src="assets/playground.js"></script>
+</body>
+</html>

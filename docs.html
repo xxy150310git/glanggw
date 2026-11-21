@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文档 · G-Lang</title>
+<meta name="description" content="G-Lang 语言文档：快速上手、语法速查、37 个关键字总表、63 个内置函数、43 条错误码手册。">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#464CB0"/><stop offset="1" stop-color="#282C65"/>
+        </linearGradient></defs>
+        <rect width="64" height="64" rx="14" fill="url(#lg)"/>
+        <text x="32" y="42" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="40" fill="#fff">G</text>
+        <rect x="19" y="44" width="15" height="3" rx="1.5" fill="#4AD9E8"/>
+        <rect x="19" y="50" width="10" height="3" rx="1.5" fill="#4AD9E8"/>
+        <rect x="19" y="56" width="6" height="3" rx="1.5" fill="#4AD9E8"/>
+      </svg>
+      <span class="brand-name">G-Lang</span>
+      <span class="brand-tag">v0.4.0</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="docs.html" class="active">文档</a>
+      <a href="download.html">下载</a>
+      <a href="playground.html">演练场</a>
+    </nav>
+    <div class="topbar-right">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/xxy150310git/G-Lang" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary btn-sm" href="download.html">下载 v0.4.0</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap docs-layout">
+  <aside class="toc">
+    <p class="toc-t">本页目录</p>
+    <ul>
+      <li><a href="#start">快速上手</a></li>
+      <li><a href="#syntax">语法速查</a></li>
+      <li><a href="#keywords">关键字总表</a></li>
+      <li><a href="#builtins">内置函数</a></li>
+      <li><a href="#errors">错误码手册</a></li>
+      <li><a href="#limits">已知限制</a></li>
+    </ul>
+    <p class="toc-t">源码包内文档</p>
+    <ul>
+      <li><a href="#keywords">01-关键字总表 v0.3</a></li>
+      <li><a href="#syntax">02-语言规范 v0.3</a></li>
+      <li><a href="#errors">04-错误码手册</a></li>
+    </ul>
+  </aside>
+
+  <article class="doc-body">
+
+    <h2 id="start"><span class="num">01</span>快速上手</h2>
+    <p>源文件用 <b>UTF-8</b> 保存，后缀 <code>.gl</code>。三种运行方式任选一种，跑的是同一份解释器内核。</p>
+
+    <h3>第一个程序</h3>
+<pre class="code"><span class="tok-c"># 注释用井号；也可以用「注」开头</span>
+<span class="tok-k">设</span> 名字 <span class="tok-k">为</span> <span class="tok-s">"世界"</span>
+<span class="tok-k">输出</span> <span class="tok-s">"你好，"</span>, 名字
+
+<span class="tok-k">重复</span> 序号 <span class="tok-k">从</span> <span class="tok-n">1</span> <span class="tok-k">到</span> <span class="tok-n">3</span>
+    <span class="tok-k">输出</span> <span class="tok-s">"第 "</span>, 序号, <span class="tok-s">" 次"</span>
+<span class="tok-k">结束</span></pre>
+
+    <h3>三种运行方式</h3>
+    <div class="table-wrap" style="margin:14px 0 18px">
+      <table>
+        <thead><tr><th style="width:34%">方式</th><th>怎么做</th></tr></thead>
+        <tbody>
+          <tr><td><b>图形工作台</b><br><code>glang-workbench.exe</code></td><td>左边写代码 → <kbd>F11</kbd> 运行，右上输出、右下填输入。装好即用。</td></tr>
+          <tr><td><b>命令行</b><br><code>glang 程序.gl</code></td><td>在 cmd / PowerShell 里直接跑，适合管道与批处理。</td></tr>
+          <tr><td><b>网页演练场</b><br><code>playground.html</code></td><td>不装任何东西，浏览器里写、浏览器里跑（本站实现，覆盖常用语法）。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>命令行参数</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>命令</th><th>作用</th></tr></thead>
+        <tbody>
+          <tr><td><code>glang 程序.gl</code></td><td>运行程序</td></tr>
+          <tr><td><code>glang --检查 程序.gl</code></td><td>只检查语法，不执行</td></tr>
+          <tr><td><code>glang --提示 程序.gl</code></td><td>显示全角符号纠正、GBK 转码等提醒</td></tr>
+          <tr><td><code>glang --版本</code> / <code>glang --帮助</code></td><td>版本与用法</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>工作台快捷键</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:32%">按键</th><th>作用</th></tr></thead>
+        <tbody>
+          <tr><td><kbd>F11</kbd> 或 <kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>运行程序</td></tr>
+          <tr><td><kbd>F9</kbd></td><td>只检查语法，不执行</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>停止正在运行的程序</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd> / <kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>打开 / 保存 <code>.gl</code> 文件</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>另存为</td></tr>
+          <tr><td><kbd>Tab</kbd></td><td>缩进四个空格，不会跳走焦点</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note"><b>输入怎么办？</b>程序里每个「输入」按顺序读「输入框」里的一行，留空就是 <code>空</code>。需要键盘输入的示例（两数求和、判断闰年、猜数字），先在输入区填好再按 F11。</div>
+
+    <h2 id="syntax"><span class="num">02</span>语法速查</h2>
+
+    <h3>变量：四种前缀决定它落在哪一层</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:26%">写法</th><th style="width:26%">落点</th><th>典型用途</th></tr></thead>
+        <tbody>
+          <tr><td><code>设 x 为 1</code></td><td>当前<b>函数</b>（顶层即全局）</td><td>日常赋值，最常用</td></tr>
+          <tr><td><code>局部 x 为 1</code></td><td>当前<b>块</b>（如果 / 重复 / 当 / 遍历 体内）</td><td>临时变量，不污染函数其余部分</td></tr>
+          <tr><td><code>全局 x 为 1</code></td><td>全局</td><td>函数里维护计数器、配置</td></tr>
+          <tr><td><code>非局部 x 为 1</code></td><td>外层函数的同名变量</td><td>闭包里累加状态</td></tr>
+          <tr><td><code>常量 π 为 3.1416</code></td><td>全局，不许再赋值</td><td>再赋值报 <code>E3204</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>输出与输入</h3>
+<pre class="code"><span class="tok-k">输出</span> <span class="tok-s">"你好，世界"</span>              <span class="tok-c"># 打印并换行</span>
+<span class="tok-k">输出</span> <span class="tok-s">"和是："</span>, <span class="tok-n">1</span> + <span class="tok-n">2</span>            <span class="tok-c"># 多值用逗号分隔，不加分隔符</span>
+<span class="tok-k">写出</span> <span class="tok-s">"下载中"</span>                  <span class="tok-c"># 打印但不换行</span>
+<span class="tok-f">换行</span>()                          <span class="tok-c"># 补一个空行</span>
+<span class="tok-k">输入</span> 名字                        <span class="tok-c"># 读一行，自动判型为整数/小数/文本</span></pre>
+
+    <h3>分支与循环</h3>
+<pre class="code"><span class="tok-k">如果</span> 分数 大于等于 <span class="tok-n">90</span>
+    <span class="tok-k">输出</span> <span class="tok-s">"优秀"</span>
+<span class="tok-k">否则如果</span> 分数 大于等于 <span class="tok-n">60</span>
+    <span class="tok-k">输出</span> <span class="tok-s">"及格"</span>
+<span class="tok-k">否则</span>
+    <span class="tok-k">输出</span> <span class="tok-s">"不及格"</span>
+<span class="tok-k">结束</span>
+
+<span class="tok-k">重复</span> i <span class="tok-k">从</span> <span class="tok-n">1</span> <span class="tok-k">到</span> <span class="tok-n">10</span>            <span class="tok-c"># 包含终点，走 10 次</span>
+    <span class="tok-k">输出</span> i
+<span class="tok-k">结束</span>
+
+<span class="tok-k">重复</span> i <span class="tok-k">从</span> <span class="tok-n">10</span> <span class="tok-k">到</span> <span class="tok-n">1</span> <span class="tok-k">步长</span> -<span class="tok-n">1</span>        <span class="tok-c"># 步长可为负；为 0 报 E3012</span>
+    <span class="tok-k">输出</span> i
+<span class="tok-k">结束</span>
+
+<span class="tok-k">当</span> 生命值 大于 <span class="tok-n">0</span>
+    <span class="tok-k">设</span> 生命值 <span class="tok-k">为</span> 生命值 - <span class="tok-n">1</span>
+<span class="tok-k">结束</span>
+
+<span class="tok-k">遍历</span> 水果, 序号 <span class="tok-k">在</span> 水果表 <span class="tok-k">中</span>     <span class="tok-c"># 双变量：元素 + 下标</span>
+    <span class="tok-k">输出</span> 序号, <span class="tok-s">"："</span>, 水果
+<span class="tok-k">结束</span></pre>
+
+    <div class="note"><b>遍历的第二个变量拿到什么？</b>列表给下标（从 0 起）、文本给位置、字典给值。单变量遍历字典时直接得到<b>键</b>。</div>
+
+    <h3>函数</h3>
+<pre class="code"><span class="tok-k">函数</span> 问候 <span class="tok-k">接受</span> 名字, 称呼 <span class="tok-k">默认</span> <span class="tok-s">"同学"</span>
+    <span class="tok-k">返回</span> 称呼 + <span class="tok-s">"，"</span> + 名字
+<span class="tok-k">结束</span>
+
+<span class="tok-k">函数</span> 求和 <span class="tok-k">接受</span> 数字...            <span class="tok-c"># 可变参数，进函数就是列表</span>
+    <span class="tok-k">返回</span> <span class="tok-f">求和</span>(数字)
+<span class="tok-k">结束</span>
+
+<span class="tok-k">设</span> 平方 <span class="tok-k">为</span> <span class="tok-k">函数</span>(x) <span class="tok-k">返回</span> x * x <span class="tok-k">结束</span>   <span class="tok-c"># 匿名函数</span>
+<span class="tok-k">输出</span> <span class="tok-f">映射</span>([<span class="tok-n">1</span>, <span class="tok-n">2</span>, <span class="tok-n">3</span>], 平方)          <span class="tok-c"># [1, 4, 9]</span></pre>
+
+    <h3>容器与切片</h3>
+<pre class="code"><span class="tok-k">设</span> 数据 <span class="tok-k">为</span> [<span class="tok-n">1</span>, <span class="tok-n">2</span>, <span class="tok-n">3</span>, <span class="tok-n">4</span>, <span class="tok-n">5</span>]
+<span class="tok-k">输出</span> 数据[-<span class="tok-n">2</span>:]                  <span class="tok-c"># [4, 5]，左闭右开、负索引、越界夹取</span>
+<span class="tok-k">输出</span> <span class="tok-f">取</span>({<span class="tok-s">"甲"</span>: <span class="tok-n">1</span>}, <span class="tok-s">"乙"</span>, <span class="tok-s">"没有"</span>)  <span class="tok-c"># 没有</span>
+<span class="tok-k">输出</span> <span class="tok-f">归约</span>(数据, <span class="tok-k">函数</span>(累计, 项) <span class="tok-k">返回</span> 累计 + 项 <span class="tok-k">结束</span>, <span class="tok-n">0</span>)  <span class="tok-c"># 15</span></pre>
+
+    <h3>错误处理</h3>
+<pre class="code"><span class="tok-k">尝试</span>
+    <span class="tok-k">设</span> 数 <span class="tok-k">为</span> <span class="tok-f">转整数</span>(<span class="tok-s">"abc"</span>)
+<span class="tok-k">捕获</span> 问题
+    <span class="tok-k">输出</span> <span class="tok-f">错误信息</span>(问题), <span class="tok-s">" ["</span>, <span class="tok-f">错误代码</span>(问题), <span class="tok-s">"] 第 "</span>, <span class="tok-f">错误行号</span>(问题), <span class="tok-s">" 行"</span>
+<span class="tok-k">结束</span>
+<span class="tok-k">抛出</span> <span class="tok-s">"分数不能是负数"</span>            <span class="tok-c"># 生成 E4001</span></pre>
+    <div class="note"><b>它不是 try 的翻译：</b>只有语言错误会被捕获，<code>返回</code> / <code>跳出</code> / <code>继续</code> / <code>停止</code> 不受影响；错误对象只读，参与运算报 <code>E3205</code>。</div>
+
+    <h2 id="keywords"><span class="num">03</span>关键字总表 · 37 个</h2>
+    <p>一个概念只给一个词。核心关键字控制在 40 个以内，其余能力全部走内置函数——多一个词就多背一个。</p>
+
+    <div class="kw-grid" id="kwGrid">
+      <div class="kw-box">
+        <h5><span>6</span>变量与赋值</h5>
+        <div class="kws">
+          <span class="kw" title="定义变量并赋值；已存在则重新赋值，落点是函数级">设</span>
+          <span class="kw" title="设 的固定搭配，不可单独使用">为</span>
+          <span class="kw" title="声明块级变量，出块即失效">局部</span>
+          <span class="kw" title="在函数里读写全局变量，也能新建">全局</span>
+          <span class="kw" title="修改外层函数（闭包）里的同名变量">非局部</span>
+          <span class="kw" title="定义不可再赋值的名字">常量</span>
+        </div>
+      </div>
+      <div class="kw-box">
+        <h5><span>3</span>输入输出</h5>
+        <div class="kws">
+          <span class="kw" title="打印并换行；多个值用逗号分隔">输出</span>
+          <span class="kw" title="打印但不换行">写出</span>
+          <span class="kw" title="读一行输入，自动判型">输入</span>
+        </div>
+      </div>
+      <div class="kw-box">
+        <h5><span>4</span>分支</h5>
+        <div class="kws">
+          <span class="kw" title="条件成立则执行块">如果</span>
+          <span class="kw" title="前一个条件不成立时再判断">否则如果</span>
+          <span class="kw" title="所有条件都不成立时执行">否则</span>
+          <span class="kw" title="关闭块：如果/当/重复/遍历/函数/尝试">结束</span>
+        </div>
+      </div>
+      <div class="kw-box">
+        <h5><span>10</span>循环</h5>
+        <div class="kws">
+          <span class="kw" title="计数循环入口">重复</span>
+          <span class="kw" title="循环起点">从</span>
+          <span class="kw" title="循环终点，包含终点">到</span>
+          <span class="kw" title="可选，默认 1，可为负">步长</span>
+          <span class="kw" title="条件循环入口，每轮先判断">当</span>
+          <span class="kw" title="遍历列表/文本/字典">遍历</span>
+          <span class="kw" title="遍历的固定搭配">在</span>
+          <span class="kw" title="遍历的收尾，必需">中</span>
+          <span class="kw" title="立即结束当前循环（break）">跳出</span>
+          <span class="kw" title="跳过本轮剩余（continue）">继续</span>
+        </div>
+      </div>
+      <div class="kw-box">
+        <h5><span>6</span>函数</h5>
+        <div class="kws">
+          <span class="kw" title="定义函数入口">函数</span>
+          <span class="kw" title="声明参数列表">接受</span>
+          <span class="kw" title="返回值并结束函数">返回</span>
+          <span class="kw" title="空值字面量">空</span>
+          <span class="kw" title="给参数一个可以省略的初值">默认</span>
+          <span class="kw" title="指当前函数自己，匿名函数靠它递归">自身</span>
+        </div>
+      </div>
+      <div class="kw-box">
+        <h5><span>8</span>逻辑 / 布尔 / 错误</h5>
+        <div class="kws">
+          <span class="kw" title="逻辑与，等价 and / &&">并且</span>
+          <span class="kw" title="逻辑或，等价 or / ||">或者</span>
+          <span class="kw" title="逻辑非，一元前缀">不</span>
+          <span class="kw" title="布尔真">真</span>
+          <span class="kw" title="布尔假">假</span>
+          <span class="kw" title="开一个会接住错误的块">尝试</span>
+          <span class="kw" title="接住错误对象并绑到块级变量">捕获</span>
+          <span class="kw" title="主动报错，或原样重抛">抛出</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>关键字逐条说明</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:16%">关键字</th><th style="width:40%">作用</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td><span class="kw">设</span></td><td>定义变量并赋值；已存在则重新赋值（函数级）</td><td><code>设 年龄 为 18</code></td></tr>
+          <tr><td><span class="kw">为</span></td><td><code>设</code> 的固定搭配，不可单独使用</td><td><code>设 名字 为 "小白"</code></td></tr>
+          <tr><td><span class="kw">局部</span></td><td>块级变量，出块即失效</td><td><code>局部 临时 为 1</code></td></tr>
+          <tr><td><span class="kw">全局</span></td><td>强制写到全局，函数里也能新建</td><td><code>全局 计数 为 计数 + 1</code></td></tr>
+          <tr><td><span class="kw">非局部</span></td><td>改外层函数（闭包）里的同名变量</td><td><code>非局部 数 为 数 + 1</code></td></tr>
+          <tr><td><span class="kw">常量</span></td><td>不可再赋值的名字</td><td><code>常量 圆周率 为 3.1416</code></td></tr>
+          <tr><td><span class="kw">输出</span></td><td>打印值并换行，多值用 <code>,</code> 分隔</td><td><code>输出 "和=", 1+2</code></td></tr>
+          <tr><td><span class="kw">写出</span></td><td>打印但不换行</td><td><code>写出 "加载中"</code></td></tr>
+          <tr><td><span class="kw">输入</span></td><td>读一行，自动判为整数 / 小数 / 文本</td><td><code>输入 名字</code></td></tr>
+          <tr><td><span class="kw">如果</span></td><td>条件成立则执行块</td><td><code>如果 分数 大于等于 60</code></td></tr>
+          <tr><td><span class="kw">否则如果</span></td><td>前一个条件不成立时再判断</td><td><code>否则如果 分数 大于 40</code></td></tr>
+          <tr><td><span class="kw">否则</span></td><td>所有条件都不成立时执行</td><td><code>否则</code></td></tr>
+          <tr><td><span class="kw">结束</span></td><td>关闭块</td><td><code>结束</code></td></tr>
+          <tr><td><span class="kw">重复</span></td><td>计数循环入口</td><td><code>重复 i 从 1 到 10</code></td></tr>
+          <tr><td><span class="kw">从</span></td><td>循环起点</td><td><code>从 1</code></td></tr>
+          <tr><td><span class="kw">到</span></td><td>循环终点，<b>包含</b>终点</td><td><code>到 10</code></td></tr>
+          <tr><td><span class="kw">步长</span></td><td>每次增量，默认 1，可为负</td><td><code>重复 i 从 10 到 1 步长 -1</code></td></tr>
+          <tr><td><span class="kw">当</span></td><td>条件循环入口，每轮先判断</td><td><code>当 生命值 大于 0</code></td></tr>
+          <tr><td><span class="kw">遍历</span></td><td>遍历列表 / 文本 / 字典</td><td><code>遍历 项 在 列表 中</code></td></tr>
+          <tr><td><span class="kw">在</span></td><td><code>遍历</code> 的固定搭配</td><td><code>在 列表 中</code></td></tr>
+          <tr><td><span class="kw">中</span></td><td><code>遍历</code> 的收尾，必需</td><td><code>在 列表 中</code></td></tr>
+          <tr><td><span class="kw">跳出</span></td><td>立即结束当前循环</td><td><code>跳出</code></td></tr>
+          <tr><td><span class="kw">继续</span></td><td>跳过本轮剩余部分</td><td><code>继续</code></td></tr>
+          <tr><td><span class="kw">函数</span></td><td>定义函数入口；也可写匿名函数</td><td><code>函数 求和 接受 a, b</code></td></tr>
+          <tr><td><span class="kw">接受</span></td><td>声明参数列表</td><td><code>接受 a, b</code></td></tr>
+          <tr><td><span class="kw">返回</span></td><td>返回值并结束函数</td><td><code>返回 a + b</code></td></tr>
+          <tr><td><span class="kw">空</span></td><td>空值字面量</td><td><code>设 结果 为 空</code></td></tr>
+          <tr><td><span class="kw">默认</span></td><td>参数默认值，调用时求值</td><td><code>接受 名字, 称呼 默认 "同学"</code></td></tr>
+          <tr><td><span class="kw">自身</span></td><td>指当前函数自己，匿名函数递归用</td><td><code>返回 n * 自身(n - 1)</code></td></tr>
+          <tr><td><span class="kw">并且</span></td><td>逻辑与，短路</td><td><code>甲 并且 乙</code></td></tr>
+          <tr><td><span class="kw">或者</span></td><td>逻辑或，短路</td><td><code>甲 或者 乙</code></td></tr>
+          <tr><td><span class="kw">不</span></td><td>逻辑非，一元前缀</td><td><code>不 已经猜中</code></td></tr>
+          <tr><td><span class="kw">真</span> / <span class="kw">假</span></td><td>布尔字面量</td><td><code>设 通过 为 真</code></td></tr>
+          <tr><td><span class="kw">尝试</span></td><td>开一个会接住错误的块</td><td><code>尝试</code> 换行 <code>……</code></td></tr>
+          <tr><td><span class="kw">捕获</span></td><td>接住错误对象并绑到块级变量</td><td><code>捕获 问题</code></td></tr>
+          <tr><td><span class="kw">抛出</span></td><td>主动报错（<code>E4001</code>）或原样重抛</td><td><code>抛出 "余额不足"</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warn"><b>比较运算符不占关键字额度：</b><code>等于</code> <code>不等于</code> <code>大于</code> <code>小于</code> <code>大于等于</code> <code>小于等于</code> 与符号 <code>== != &gt; &lt; &gt;= &lt;=</code> 完全等价。比较不能连写，<code>1 &lt; x &lt; 10</code> 报 <code>E2005</code>。</div>
+
+    <h2 id="builtins"><span class="num">04</span>内置函数 · 63 个</h2>
+    <p>命名规则是<b>动词在前、对象在后</b>：<code>转整数</code> 而不是 <code>整数转</code>，与中文习惯一致。内置函数是「值」，可以当参数传给别人。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:20%">分类</th><th style="width:8%">数量</th><th>函数</th></tr></thead>
+        <tbody>
+          <tr><td><b>数学</b></td><td>9</td><td><code>绝对值</code> <code>向下取整</code> <code>向上取整</code> <code>四舍五入</code> <code>开方</code> <code>幂</code> <code>最大值</code> <code>最小值</code> <code>随机数</code></td></tr>
+          <tr><td><b>文本</b></td><td>9</td><td><code>长度</code> <code>截取</code> <code>查找</code> <code>替换</code> <code>分割</code> <code>合并</code> <code>去空白</code> <code>大写</code> <code>小写</code></td></tr>
+          <tr><td><b>转换</b></td><td>4</td><td><code>转整数</code> <code>转小数</code> <code>转文本</code> <code>转布尔</code></td></tr>
+          <tr><td><b>列表与集合</b></td><td>8</td><td><code>追加</code> <code>插入</code> <code>删除</code> <code>排序</code> <code>反转</code> <code>求和</code> <code>包含</code> <code>清空</code></td></tr>
+          <tr><td><b>输出与拼接</b></td><td>2</td><td><code>换行</code> <code>连接</code></td></tr>
+          <tr><td><b>其他</b></td><td>2</td><td><code>当前时间</code> <code>延时</code></td></tr>
+          <tr><td><b>类型</b></td><td>9</td><td><code>类型</code> <code>是整数</code> <code>是小数</code> <code>是文本</code> <code>是布尔</code> <code>是列表</code> <code>是字典</code> <code>是函数</code> <code>是空</code></td></tr>
+          <tr><td><b>容器</b></td><td>7</td><td><code>取</code> <code>切片</code> <code>键列表</code> <code>值列表</code> <code>合并字典</code> <code>去重</code> <code>展平</code></td></tr>
+          <tr><td><b>高阶</b></td><td>8</td><td><code>映射</code> <code>过滤</code> <code>归约</code> <code>任一</code> <code>全部</code> <code>计数满足</code> <code>查找首个</code> <code>按函数排序</code></td></tr>
+          <tr><td><b>错误对象</b></td><td>5</td><td><code>错误信息</code> <code>错误代码</code> <code>错误提示</code> <code>错误行号</code> <code>错误调用栈</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note"><b>两个容易混的：</b><code>合并</code> 拼的是<b>列表里的元素</b>，<code>连接</code> 拼的是<b>任意几个值</b>。想明确表达字符串拼接时用 <code>连接(a, b)</code>，别依赖 <code>+</code>。</div>
+
+    <h2 id="errors"><span class="num">05</span>错误码手册 · 43 条</h2>
+    <p>号段只增不改：老号段一旦发布就是契约，新功能只能用新号段。</p>
+
+    <div class="filters">
+      <input class="searchbox" id="errSearch" type="search" placeholder="搜索错误码或含义，例如 3001 / 变量 / 结束">
+      <button class="chip on" data-g="all">全部 43</button>
+      <button class="chip" data-g="lex">词法 5</button>
+      <button class="chip" data-g="syn">语法 9</button>
+      <button class="chip" data-g="val">值 13</button>
+      <button class="chip" data-g="type">类型 7</button>
+      <button class="chip" data-g="user">用户抛出 2</button>
+      <button class="chip" data-g="other">其他 7</button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="errTable">
+        <thead><tr><th style="width:105px">错误码</th><th style="width:96px">分类</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr data-g="lex"><td><code>E1001</code></td><td>词法</td><td>无法识别的字符</td></tr>
+          <tr data-g="lex"><td><code>E1002</code></td><td>词法</td><td>文本没有闭合引号</td></tr>
+          <tr data-g="lex"><td><code>E1003</code></td><td>词法</td><td>数字格式不对</td></tr>
+          <tr data-g="lex"><td><code>E1004</code></td><td>词法</td><td>名字太长</td></tr>
+          <tr data-g="lex"><td><code>E1005</code></td><td>词法</td><td>可变参数的三个点写少了</td></tr>
+          <tr data-g="syn"><td><code>E2001</code></td><td>语法</td><td>语句或表达式写不完整</td></tr>
+          <tr data-g="syn"><td><code>E2002</code></td><td>语法</td><td>关键字用错了地方</td></tr>
+          <tr data-g="syn"><td><code>E2003</code></td><td>语法</td><td>缺少「结束」</td></tr>
+          <tr data-g="syn"><td><code>E2004</code></td><td>语法</td><td>跳出／继续不在循环里</td></tr>
+          <tr data-g="syn"><td><code>E2005</code></td><td>语法</td><td>语法结构冲突（重复参数名、连续比较等）</td></tr>
+          <tr data-g="syn"><td><code>E2006</code></td><td>语法</td><td>用了关键字或保留字当名字</td></tr>
+          <tr data-g="syn"><td><code>E2007</code></td><td>语法</td><td>括号没有配对</td></tr>
+          <tr data-g="syn"><td><code>E2008</code></td><td>语法</td><td>嵌套太深</td></tr>
+          <tr data-g="syn"><td><code>E2009</code></td><td>语法</td><td>可变参数写错位置</td></tr>
+          <tr data-g="val"><td><code>E3001</code></td><td>值</td><td>变量还没有赋值</td></tr>
+          <tr data-g="val"><td><code>E3002</code></td><td>值</td><td>类型不符合函数要求</td></tr>
+          <tr data-g="val"><td><code>E3003</code></td><td>值</td><td>不能除以零</td></tr>
+          <tr data-g="val"><td><code>E3004</code></td><td>值</td><td>下标超出范围</td></tr>
+          <tr data-g="val"><td><code>E3005</code></td><td>值</td><td>字典里没有这个键</td></tr>
+          <tr data-g="val"><td><code>E3006</code></td><td>值</td><td>函数不存在或不是函数</td></tr>
+          <tr data-g="val"><td><code>E3007</code></td><td>值</td><td>参数个数不对</td></tr>
+          <tr data-g="val"><td><code>E3008</code></td><td>值</td><td>递归太深</td></tr>
+          <tr data-g="val"><td><code>E3009</code></td><td>值</td><td>运算符不支持这两个类型</td></tr>
+          <tr data-g="val"><td><code>E3010</code></td><td>值</td><td>空值不能参与运算</td></tr>
+          <tr data-g="val"><td><code>E3011</code></td><td>值</td><td>数字太大，整数装不下</td></tr>
+          <tr data-g="val"><td><code>E3012</code></td><td>值</td><td>步长不能是 0</td></tr>
+          <tr data-g="val"><td><code>E3013</code></td><td>值</td><td>这个类型不能遍历</td></tr>
+          <tr data-g="type"><td><code>E3201</code></td><td>类型</td><td>标注的类型与实际值不符</td></tr>
+          <tr data-g="type"><td><code>E3202</code></td><td>类型</td><td>没有这个类型名</td></tr>
+          <tr data-g="type"><td><code>E3203</code></td><td>类型</td><td>类型标注写法不对</td></tr>
+          <tr data-g="type"><td><code>E3204</code></td><td>类型</td><td>常量不能再赋值</td></tr>
+          <tr data-g="type"><td><code>E3205</code></td><td>类型</td><td>错误对象不能参与运算</td></tr>
+          <tr data-g="type"><td><code>E3206</code></td><td>类型</td><td>默认参数位置不对</td></tr>
+          <tr data-g="type"><td><code>E3207</code></td><td>类型</td><td>可变参数与默认值冲突</td></tr>
+          <tr data-g="user"><td><code>E4001</code></td><td>用户抛出</td><td>程序自己抛出的错误</td></tr>
+          <tr data-g="user"><td><code>E4002</code></td><td>用户抛出</td><td>断言失败</td></tr>
+          <tr data-g="other"><td><code>E3301</code></td><td>数据格式</td><td>JSON 格式错误</td></tr>
+          <tr data-g="other"><td><code>E3401</code></td><td>文件系统</td><td>打不开文件</td></tr>
+          <tr data-g="other"><td><code>E3402</code></td><td>文件系统</td><td>写入失败</td></tr>
+          <tr data-g="other"><td><code>E3403</code></td><td>文件系统</td><td>不是目录</td></tr>
+          <tr data-g="other"><td><code>E5001</code></td><td>模块</td><td>循环导入</td></tr>
+          <tr data-g="other"><td><code>E5002</code></td><td>模块</td><td>找不到模块</td></tr>
+          <tr data-g="other"><td><code>E5003</code></td><td>模块</td><td>导入必须写在顶层</td></tr>
+        </tbody>
+      </table>
+      <div class="empty" id="errEmpty" hidden>没有匹配的错误码，换个词试试？</div>
+    </div>
+    <div class="note"><b>43 条已注册，其中 35 条在源码中真正使用。</b>文件系统与模块号段是给后续版本预留的，先占位、不改号。</div>
+
+    <h2 id="limits"><span class="num">06</span>已知限制</h2>
+    <ul>
+      <li><b>只支持 64 位 Windows 7 及以上</b>（图形工作台与安装程序）；解释器内核本身是 C++17 可移植的。</li>
+      <li><b>没有代码签名</b>，SmartScreen 会提示，点「更多信息 → 仍要运行」即可。</li>
+      <li><b>类、对象、模块、异常层级尚未启用</b>：<code>类</code> <code>对象</code> <code>导入</code> <code>模块</code> 等词已作为保留字占位，现在不能用它们当变量名。</li>
+      <li><b>比较不能连写</b>：<code>1 &lt; x &lt; 10</code> 报 <code>E2005</code>，要写成 <code>1 &lt; x 并且 x &lt; 10</code>。</li>
+      <li><b>有硬上限</b>：递归深度 2000 层、嵌套 200 层，超了会给出明确报错而不是崩掉。</li>
+      <li><b>追求可读性，不追求性能</b>：它是给第一次写代码的人用的，不是替代 C++ 的。</li>
+    </ul>
+
+    <div class="cta-band" style="margin-top:40px">
+      <div>
+        <h3>看懂了？去跑一段</h3>
+        <p>演练场里 11 个示例随时可切换，改完点运行就有结果。</p>
+      </div>
+      <div class="cta-row" style="margin:0">
+        <a class="btn btn-primary" href="playground.html">打开演练场</a>
+        <a class="btn btn-ghost" href="download.html">下载 v0.4.0</a>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© 2026 凌空工作室 · G-Lang</span>
+      <span><a href="index.html">返回首页</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
